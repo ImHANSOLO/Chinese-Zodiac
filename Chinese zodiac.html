@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chinese Zodiac Finder</title>
+    <style>
+      #result img {
+        width: 100px;
+        height: 100px;
+      }
+      #result p {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <label for="yearInput">Enter a year:</label>
+    <input
+      type="number"
+      id="yearInput"
+      placeholder="YYYY"
+      min="1000"
+      max="9999"
+    />
+    <button onclick="findZodiac()">Find Zodiac</button>
+    <button onclick="resetPage()">Reset</button>
+
+    <div id="result"></div>
+
+    <script>
+      // Zodiac data
+      const zodiacs = {
+        Rat: {
+          image:
+            "https://pic4.zhimg.com/80/v2-13b08cdb49fff4c9a0414b35cb281187_720w.webp",
+          details: "Quick-witted, resourceful, versatile, kind.",
+        },
+        Ox: {
+          image:
+            "https://img01.sc115.com/uploads3/sc/jpgs/2211/e7e8f9dcb12b9d06_sc115.com.jpg",
+          details: "Diligent, dependable, strong, determined.",
+        },
+        Tiger: {
+          image:
+            "https://p6.itc.cn/q_70/images03/20230719/62ed4c095dd447e89f7b8a83c7cd823b.jpeg",
+          details: "Brave, confident, competitive.",
+        },
+        Rabbit: {
+          image:
+            "https://img-baofun.zhhainiao.com/pcwallpaper_ugc_mobile/static/75c7b533ee001410e1ef7f21271bafef.jpg?x-oss-process=image%2fresize%2cm_lfit%2cw_640%2ch_1138",
+          details: "Quiet, elegant, kind, responsible.",
+        },
+        Dragon: {
+          image:
+            "https://p9.itc.cn/q_70/images03/20230923/def3b29719af4e969c69e628c2ffe395.png",
+          details: "Confident, intelligent, enthusiastic.",
+        },
+        Snake: {
+          image:
+            "https://p3.itc.cn/q_70/images03/20230716/c4c8a73ec9bf46ad9914fbead1d9b1e5.jpeg",
+          details: "Enigmatic, intelligent, wise.",
+        },
+        Horse: {
+          image:
+            "https://www.tarotkingship.com/wp-content/uploads/2023/04/1-5.jpg",
+          details: "Animated, active, energetic.",
+        },
+        Goat: {
+          image:
+            "https://p5.itc.cn/q_70/images03/20230702/5fdd8130e0024bae9643f464b6eb2ef6.jpeg",
+          details: "Calm, gentle, sympathetic.",
+        },
+        Monkey: {
+          image:
+            "https://p2.itc.cn/q_70/images03/20230923/74c163cc933e4ad1bf3c32171e583df4.png",
+          details: "Sharp, smart, curiosity.",
+        },
+        Rooster: {
+          image:
+            "https://p1.itc.cn/q_70/images03/20231031/c5002d3cd178462eb7a49afa16a82009.jpeg",
+          details: "Observant, hardworking, courageous.",
+        },
+        Dog: {
+          image:
+            "https://imgjy.yxlady.com/upload/img/jy_jh/20240107140659_50764.jpeg",
+          details: "Lovely, honest, prudent.",
+        },
+        Pig: {
+          image:
+            "https://p7.itc.cn/q_70/images03/20230708/011806dad4eb4615bc367ae82cba491c.jpeg",
+          details: "Compassionate, generous, diligent.",
+        },
+      };
+
+      function findZodiac() {
+        const year = document.getElementById("yearInput").value;
+        if (year.length === 4) {
+          const zodiacIndex = (year - 4) % 12;
+          const zodiacName = Object.keys(zodiacs)[zodiacIndex];
+          const zodiac = zodiacs[zodiacName];
+          displayResult(zodiacName, zodiac.image, zodiac.details);
+        } else {
+          document.getElementById("result").innerHTML =
+            "No data found for that year.";
+        }
+      }
+
+      function displayResult(name, image, details) {
+        document.getElementById("result").innerHTML = `
+    <img src="${image}" alt="${name}">
+    <p>${name}</p>
+    <p>${details}</p>
+  `;
+      }
+
+      function resetPage() {
+        document.getElementById("yearInput").value = "";
+        document.getElementById("result").innerHTML = "";
+      }
+    </script>
+  </body>
+</html>
